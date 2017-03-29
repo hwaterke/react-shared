@@ -1,0 +1,16 @@
+{
+  "name": "hw-react-shared",
+  "version": "0.0.1",
+  "description": "Code shared between different React apps",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hwaterke/react-shared.git"
+  },
+  "author": "Harold Waterkeyn",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hwaterke/react-shared/issues"
+  },
+  "homepage": "https://github.com/hwaterke/react-shared#readme"
+}
