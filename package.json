@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "Code shared between different React apps",
   "main": "index.js",
+  "devDependencies": {
+    "flow-bin": "^0.42.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hwaterke/react-shared.git"
