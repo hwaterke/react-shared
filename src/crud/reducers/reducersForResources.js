@@ -10,7 +10,7 @@ import {reducersFor} from './reducersFor';
 export function reducersForResources(resources: ResourceDefinition[]) {
   const reducers = {};
 
-  resources.forEach(resource => reducers[resource.path] = reducersFor(resource));
+  resources.forEach(resource => (reducers[resource.path] = reducersFor(resource)));
 
-  return combineReducers(reducers)
+  return combineReducers(reducers);
 }

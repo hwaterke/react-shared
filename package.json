@@ -2,14 +2,18 @@
   "name": "hw-react-shared",
   "version": "0.0.1",
   "description": "Code shared between different React apps",
-  "main": "index.js",
+  "scripts": {
+    "format": "prettier --single-quote --bracket-spacing=false --print-width 100 --write 'src/**/*.js'"
+  },
   "dependencies": {
-    "react": "^15.4.2",
+    "react": "^15.5.4",
     "redux": "^3.6.0",
-    "redux-crud": "^3.0.4"
+    "redux-crud": "^3.0.5",
+    "reselect": "^3.0.0"
   },
   "devDependencies": {
-    "flow-bin": "^0.42.0"
+    "flow-bin": "^0.45.0",
+    "prettier": "^1.2.2"
   },
   "repository": {
     "type": "git",
