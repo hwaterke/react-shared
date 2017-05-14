@@ -5,7 +5,7 @@ export type Config = {
   +backendSelector: (state: any) => string,
   +tokenSelector: (state: any) => ?string,
   +tokenToHeader: (token: string) => {[headerName: string]: string},
-  +onAuthError: (props: {}) => void,
-  +onError: (props: {}, resource: ResourceDefinition, operation: string, error: any) => void,
+  +onAuthError: (props: any) => void,
+  +onError: (props: any, resource: ResourceDefinition, operation: string, error: any) => void,
   +cuid: () => string
 };
