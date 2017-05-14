@@ -3,18 +3,21 @@
   "version": "0.0.1",
   "description": "Code shared between different React apps",
   "scripts": {
-    "format": "prettier --single-quote --bracket-spacing=false --print-width 100 --write 'src/**/*.js'",
+    "flow": "flow check",
+    "format": "prettier --single-quote --bracket-spacing=false --print-width 110 --write 'src/**/*.js'",
     "precommit": "lint-staged"
   },
   "lint-staged": {
     "*.js": [
-      "prettier --write --single-quote --bracket-spacing=false --print-width 100",
+      "prettier --write --single-quote --bracket-spacing=false --print-width 110",
       "eslint",
       "git add"
     ]
   },
   "dependencies": {
+    "axios": "^0.16.1",
     "react": "^15.5.4",
+    "react-redux": "^5.0.4",
     "redux": "^3.6.0",
     "redux-crud": "^3.0.5",
     "reselect": "^3.0.0"

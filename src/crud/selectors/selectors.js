@@ -6,8 +6,7 @@ const byIdSelectorRegistry = {};
 
 export function byIdSelector(resourceDefinition: ResourceDefinition) {
   if (!byIdSelectorRegistry[resourceDefinition.path]) {
-    byIdSelectorRegistry[resourceDefinition.path] = state =>
-      state.resources[resourceDefinition.path];
+    byIdSelectorRegistry[resourceDefinition.path] = state => state.resources[resourceDefinition.path];
   }
 
   return byIdSelectorRegistry[resourceDefinition.path];
