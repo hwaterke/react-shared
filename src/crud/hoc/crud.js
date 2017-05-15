@@ -6,11 +6,8 @@ import reduxCrud from 'redux-crud';
 import axios from 'axios';
 import type {Config} from './types';
 import type {ResourceDefinition} from '../types/ResourceDefinition';
-
-/**
- * Type alias for a React class component
- */
-type ClassComponent<D, P, S> = Class<React$Component<D, P, S>>;
+import type {ClassComponent} from '../types/ClassComponent';
+import {nameHocWrapperComponent} from './utils';
 
 /**
  * Higher order component that injects props to handle crud api calls
@@ -203,10 +200,7 @@ export function crud(config: Config) {
       }
     }
 
-    // Extract the name of the WrappedComponent
-    const wrappedComponentName = WrappedComponent.displayName || WrappedComponent.name || 'Component';
-    // Name the returned wrapper accordingly
-    Crud.displayName = `Crud(${wrappedComponentName})`;
+    nameHocWrapperComponent(Crud, 'Crud', WrappedComponent);
 
     return connect(mapStateToProps)(Crud);
   };
