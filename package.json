@@ -1,0 +1,59 @@
+{
+  "name": "hw-react-shared",
+  "version": "0.0.1",
+  "description": "Code shared between different React apps",
+  "main": "lib/index.js",
+  "scripts": {
+    "flow": "flow check",
+    "compile": "babel -d lib/ src/",
+    "compile:flow": "flow-copy-source src lib",
+    "format": "prettier --single-quote --bracket-spacing=false --print-width 110 --write 'src/**/*.js'",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "src/**/*.js": [
+      "prettier --write --single-quote --bracket-spacing=false --print-width 110",
+      "eslint",
+      "git add"
+    ]
+  },
+  "dependencies": {
+    "axios": "^0.16.1",
+    "react": "^15.5.4",
+    "react-redux": "^5.0.4",
+    "redux": "^3.6.0",
+    "redux-crud": "^3.0.5",
+    "redux-form": "^6.7.0",
+    "reselect": "^3.0.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-eslint": "^7.2.3",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-preset-env": "^1.4.0",
+    "babel-preset-flow": "^6.23.0",
+    "babel-preset-react": "^6.24.1",
+    "eslint": "^3.19.0",
+    "eslint-config-react-app": "^0.6.2",
+    "eslint-plugin-flowtype": "^2.32.1",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "^7.0.0",
+    "flow-bin": "^0.46.0",
+    "flow-copy-source": "^1.1.0",
+    "husky": "^0.13.3",
+    "lint-staged": "^3.4.1",
+    "prettier": "^1.2.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hwaterke/react-shared.git"
+  },
+  "author": "Harold Waterkeyn",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hwaterke/react-shared/issues"
+  },
+  "homepage": "https://github.com/hwaterke/react-shared#readme"
+}
