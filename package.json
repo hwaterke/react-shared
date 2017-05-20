@@ -11,7 +11,7 @@
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "*.js": [
+    "src/**/*.js": [
       "prettier --write --single-quote --bracket-spacing=false --print-width 110",
       "eslint",
       "git add"
