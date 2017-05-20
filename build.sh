@@ -60,12 +60,11 @@ mv lib $TMP_DIR_NAME/
 cp package.json $TMP_DIR_NAME/
 check
 
-blue_line "Checking out build branch... "
+blue "Checking out build branch... "
 git checkout build
-check
 
 blue_line "Cleaning old build... "
-rm package.json
+rm package.json > /dev/null 2>&1 || true
 check
 
 blue_line "Loading new build... "
