@@ -29,6 +29,9 @@ TAG=$(git rev-parse HEAD)
 BRANCH=$(git rev-parse --symbolic-full-name --abbrev-ref HEAD)
 TMP_DIR_NAME="tmp_build"
 
+echo "Exiting if uncommitted changes..."
+git diff-index --quiet HEAD --
+
 echo "Building for:"
 printf "  Branch: "
 blue $BRANCH
@@ -75,4 +78,8 @@ rm -r $TMP_DIR_NAME > /dev/null 2>&1
 check
 
 # Commit ?
+blue_line "Commit new build... "
+git add .
+git commit -m "Build of $TAG"
+
 # Go back to $BRANCH
