@@ -61,7 +61,6 @@ export function resourceForm(
         delete passThroughProps.createResource;
         delete passThroughProps.updateResource;
         delete passThroughProps.deleteResource;
-        delete passThroughProps.postSubmit;
         return passThroughProps;
       };
 
