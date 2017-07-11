@@ -2603,9 +2603,9 @@ rechoir@^0.6.2:
   dependencies:
     resolve "^1.1.6"
 
-redux-crud@^3.0.5:
-  version "3.0.5"
-  resolved "https://registry.yarnpkg.com/redux-crud/-/redux-crud-3.0.5.tgz#417d63a7a6e7e22a9079c8219fb7258ebcfe308f"
+redux-crud@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/redux-crud/-/redux-crud-3.2.0.tgz#4dd7fe5b2bab87f4e24009a6aba670a63f571acb"
   dependencies:
     action-names "^0.3.2"
     invariant "^2.1.0"
