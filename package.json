@@ -7,12 +7,12 @@
     "flow": "flow check",
     "compile": "babel -d lib/ src/",
     "compile:flow": "flow-copy-source src lib",
-    "format": "prettier --single-quote --bracket-spacing=false --print-width 110 --write 'src/**/*.js'",
+    "format": "prettier --single-quote --bracket-spacing=false --write 'src/**/*.js'",
     "precommit": "lint-staged"
   },
   "lint-staged": {
     "src/**/*.js": [
-      "prettier --write --single-quote --bracket-spacing=false --print-width 110",
+      "prettier --write --single-quote --bracket-spacing=false",
       "eslint",
       "git add"
     ]
