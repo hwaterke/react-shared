@@ -3,23 +3,27 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {nameHocWrapperComponent} from './utils';
 import {reduxForm} from 'redux-form';
-import type {ResourceDefinition} from '../types/ResourceDefinition';
 import type {ClassComponent} from '../types/ClassComponent';
+import type {ResourceFormConfig} from './types';
 
 /**
  * HOC to provide CRUD functionality to a form.
  */
-export function resourceForm(
-  crud: Function,
-  resource: ResourceDefinition,
-  formToResource: Function = v => v,
-  resourceToForm: Function = v => v
-) {
-  return function(WrappedComponent: ClassComponent<any, any, any>): ClassComponent<void, any, void> {
+export function resourceForm(config: ResourceFormConfig) {
+  const configuration = {
+    formToResource: v => v,
+    resourceToForm: v => v,
+    ...config
+  };
+
+  return function(
+    WrappedComponent: ClassComponent<any, any, any>
+  ): ClassComponent<void, any, void> {
     // Make a redux-form from the WrappedComponent
     const ReduxFormedWrappedComponent = reduxForm({
-      form: resource.path,
-      enableReinitialize: true
+      form: configuration.resource.path,
+      enableReinitialize: true,
+      validate: configuration.validate
     })(WrappedComponent);
 
     class ResourceForm extends React.Component {
@@ -32,13 +36,13 @@ export function resourceForm(
       };
 
       onSubmit = data => {
-        const key = resource.key || 'uuid';
-        const entity = formToResource(data, this.props);
+        const key = configuration.resource.key || 'uuid';
+        const entity = configuration.formToResource(data, this.props);
         if (this.props.updatedResource && this.props.updatedResource[key]) {
           entity[key] = this.props.updatedResource[key];
-          this.props.updateResource(resource, entity);
+          this.props.updateResource(configuration.resource, entity);
         } else {
-          this.props.createResource(resource, entity);
+          this.props.createResource(configuration.resource, entity);
         }
         this.props.postSubmit && this.props.postSubmit();
       };
@@ -47,8 +51,8 @@ export function resourceForm(
        * Delete the updatedResource
        */
       deleteResource = () => {
-        const key = resource.key || 'uuid';
-        this.props.deleteResource(resource, {
+        const key = configuration.resource.key || 'uuid';
+        this.props.deleteResource(configuration.resource, {
           [key]: this.props.updatedResource[key]
         });
         this.props.postSubmit && this.props.postSubmit();
@@ -73,7 +77,10 @@ export function resourceForm(
             {...passThroughProps}
             onSubmit={this.onSubmit}
             deleteResource={this.deleteResource}
-            initialValues={resourceToForm(this.props.updatedResource, passThroughProps)}
+            initialValues={configuration.resourceToForm(
+              this.props.updatedResource,
+              passThroughProps
+            )}
             isCreate={this.props.updatedResource == null}
             isUpdate={this.props.updatedResource != null}
           />
@@ -81,8 +88,12 @@ export function resourceForm(
       }
     }
 
-    nameHocWrapperComponent(ResourceForm, 'ResourceForm', ReduxFormedWrappedComponent);
+    nameHocWrapperComponent(
+      ResourceForm,
+      'ResourceForm',
+      ReduxFormedWrappedComponent
+    );
 
-    return crud(ResourceForm);
+    return configuration.crud(ResourceForm);
   };
 }
