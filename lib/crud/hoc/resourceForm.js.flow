@@ -28,7 +28,7 @@ export function resourceForm(config: ResourceFormConfig) {
 
     class ResourceForm extends React.Component {
       static propTypes = {
-        updatedResource: PropTypes.object,
+        updatedResource: configuration.resource.propType,
         createResource: PropTypes.func.isRequired,
         updateResource: PropTypes.func.isRequired,
         deleteResource: PropTypes.func.isRequired,
