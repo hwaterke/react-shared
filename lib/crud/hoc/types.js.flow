@@ -6,6 +6,19 @@ export type Config = {
   +tokenSelector: (state: any) => ?string,
   +tokenToHeader: (token: string) => {[headerName: string]: string},
   +onAuthError: (props: any) => void,
-  +onError: (props: any, resource: ResourceDefinition, operation: string, error: any) => void,
+  +onError: (
+    props: any,
+    resource: ResourceDefinition,
+    operation: string,
+    error: any
+  ) => void,
   +cuid: () => string
+};
+
+export type ResourceFormConfig = {
+  crud: Function,
+  resource: ResourceDefinition,
+  formToResource?: (data: {}, ownProps?: {}) => {},
+  resourceToForm?: (resource?: {}, ownProps?: {}) => ?{},
+  validation?: (data: {}) => {}
 };
