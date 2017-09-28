@@ -12,7 +12,11 @@ export type Config = {
     operation: string,
     error: any
   ) => void,
-  +cuid: () => string
+  +cuid: () => string,
+  +fetchAllDataToRecords: (responseData: any) => any[],
+  +fetchOneDataToRecord: (responseData: any) => any,
+  +createDataToRecord: (responseData: any) => any,
+  +updateDataToRecord: (responseData: any) => any
 };
 
 export type ResourceFormConfig = {

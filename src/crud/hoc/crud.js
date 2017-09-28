@@ -24,7 +24,9 @@ export function crud(config: Config) {
   /**
    * The actual HoC
    */
-  return function(WrappedComponent: ClassComponent<any, any, any>): ClassComponent<void, any, void> {
+  return function(
+    WrappedComponent: ClassComponent<any, any, any>
+  ): ClassComponent<void, any, void> {
     /**
      * The wrapper component
      */
@@ -50,12 +52,24 @@ export function crud(config: Config) {
         promise
           .then(
             response => {
-              this.props.dispatch(baseActionCreators.fetchSuccess(response.data.data, {replace}));
+              this.props.dispatch(
+                baseActionCreators.fetchSuccess(
+                  config.fetchAllDataToRecords(response.data),
+                  {replace}
+                )
+              );
             },
             error => {
-              this.props.dispatch(baseActionCreators.fetchError(error.response.data.error));
+              this.props.dispatch(
+                baseActionCreators.fetchError(error.response.data.error)
+              );
               this.handleAuthError(error.response.status);
-              config.onError(this.props, resource, 'fetchAll', error.response.data.error);
+              config.onError(
+                this.props,
+                resource,
+                'fetchAll',
+                error.response.data.error
+              );
             }
           )
           .catch(err => {
@@ -65,10 +79,51 @@ export function crud(config: Config) {
         return promise;
       };
 
+      fetchOne = (resource: ResourceDefinition, key: string) => {
+        const baseActionCreators = this.initBaseActionCreators(resource);
+        this.props.dispatch(baseActionCreators.fetchStart());
+
+        const promise = axios({
+          url: `${this.props.backendUrl}/${resource.path}/${key}`,
+          method: 'get',
+          headers: config.tokenToHeader(this.props.token)
+        });
+
+        promise
+          .then(
+            response => {
+              this.props.dispatch(
+                baseActionCreators.fetchSuccess([
+                  config.fetchOneDataToRecord(response.data)
+                ])
+              );
+            },
+            error => {
+              this.props.dispatch(
+                baseActionCreators.fetchError(error.response.data.error)
+              );
+              this.handleAuthError(error.response.status);
+              config.onError(
+                this.props,
+                resource,
+                'fetchOne',
+                error.response.data.error
+              );
+            }
+          )
+          .catch(err => {
+            config.onError(this.props, resource, 'fetchOne', err.toString());
+          });
+
+        return promise;
+      };
+
       clearAll = (resource: ResourceDefinition) => {
         const baseActionCreators = this.initBaseActionCreators(resource);
         this.props.dispatch(baseActionCreators.fetchStart());
-        this.props.dispatch(baseActionCreators.fetchSuccess([], {replace: true}));
+        this.props.dispatch(
+          baseActionCreators.fetchSuccess([], {replace: true})
+        );
       };
 
       createResource = (resource: ResourceDefinition, entity: any) => {
@@ -93,12 +148,27 @@ export function crud(config: Config) {
         promise
           .then(
             response => {
-              this.props.dispatch(baseActionCreators.createSuccess(response.data, cid));
+              this.props.dispatch(
+                baseActionCreators.createSuccess(
+                  config.createDataToRecord(response.data),
+                  cid
+                )
+              );
             },
             error => {
-              this.props.dispatch(baseActionCreators.createError(error.response.data.error, entity));
+              this.props.dispatch(
+                baseActionCreators.createError(
+                  error.response.data.error,
+                  entity
+                )
+              );
               this.handleAuthError(error.response.status);
-              config.onError(this.props, resource, 'create', error.response.data.error);
+              config.onError(
+                this.props,
+                resource,
+                'create',
+                error.response.data.error
+              );
             }
           )
           .catch(err => {
@@ -124,12 +194,26 @@ export function crud(config: Config) {
         promise
           .then(
             response => {
-              this.props.dispatch(baseActionCreators.updateSuccess(response.data));
+              this.props.dispatch(
+                baseActionCreators.updateSuccess(
+                  config.updateDataToRecord(response.data)
+                )
+              );
             },
             error => {
-              this.props.dispatch(baseActionCreators.updateError(error.response.data.error, entity));
+              this.props.dispatch(
+                baseActionCreators.updateError(
+                  error.response.data.error,
+                  entity
+                )
+              );
               this.handleAuthError(error.response.status);
-              config.onError(this.props, resource, 'update', error.response.data.error);
+              config.onError(
+                this.props,
+                resource,
+                'update',
+                error.response.data.error
+              );
             }
           )
           .catch(err => {
@@ -156,9 +240,19 @@ export function crud(config: Config) {
               this.props.dispatch(baseActionCreators.deleteSuccess(entity));
             },
             error => {
-              this.props.dispatch(baseActionCreators.deleteError(error.response.data.error, entity));
+              this.props.dispatch(
+                baseActionCreators.deleteError(
+                  error.response.data.error,
+                  entity
+                )
+              );
               this.handleAuthError(error.response.status);
-              config.onError(this.props, resource, 'delete', error.response.data.error);
+              config.onError(
+                this.props,
+                resource,
+                'delete',
+                error.response.data.error
+              );
             }
           )
           .catch(err => {
