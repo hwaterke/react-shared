@@ -1,6 +1,6 @@
 {
   "name": "redux-crud-hoc",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "HoC to easily interface with a REST backend",
   "main": "lib/index.js",
   "scripts": {
