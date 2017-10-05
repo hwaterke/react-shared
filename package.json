@@ -5,6 +5,7 @@
   "main": "lib/index.js",
   "scripts": {
     "flow": "flow check",
+    "prebuild": "rm -r lib",
     "build": "babel -d lib/ src/",
     "build:flow": "flow-copy-source src lib",
     "format": "prettier --single-quote --bracket-spacing=false --write 'src/**/*.js'",
