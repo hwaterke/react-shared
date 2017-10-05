@@ -9,10 +9,29 @@ import type {ResourceDefinition} from '../types/ResourceDefinition';
 import type {ClassComponent} from '../types/ClassComponent';
 import {nameHocWrapperComponent} from './utils';
 
+const defaultConfig = {
+  tokenToHeader: () => ({}),
+  onAuthError: () => undefined,
+  onError: () => undefined,
+  fetchAllDataToRecords: responseData => responseData,
+  fetchOneDataToRecord: responseData => responseData,
+  createDataToRecord: responseData => responseData,
+  updateDataToRecord: responseData => responseData
+};
+
+function validateConfig(config: Config) {
+  return {
+    ...defaultConfig,
+    config
+  };
+}
+
 /**
  * Higher order component that injects props to handle crud api calls
  */
-export function crud(config: Config) {
+export function createCrud(crudConfig: Config) {
+  const config = validateConfig(crudConfig);
+
   /**
    * Selectors for injecting required props into the wrapper component.
    */
