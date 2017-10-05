@@ -18,7 +18,7 @@ export function crud(config: Config) {
    */
   const mapStateToProps = state => ({
     backendUrl: config.backendSelector(state),
-    token: config.tokenSelector(state)
+    token: config.tokenSelector && config.tokenSelector(state)
   });
 
   /**
