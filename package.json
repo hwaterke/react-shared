@@ -1,14 +1,15 @@
 {
-  "name": "hw-react-shared",
-  "version": "0.0.1",
-  "description": "Code shared between different React apps",
+  "name": "redux-crud-hoc",
+  "version": "0.0.2",
+  "description": "HoC to easily interface with a REST backend",
   "main": "lib/index.js",
   "scripts": {
     "flow": "flow check",
-    "compile": "babel -d lib/ src/",
-    "compile:flow": "flow-copy-source src lib",
+    "build": "babel -d lib/ src/",
+    "build:flow": "flow-copy-source src lib",
     "format": "prettier --single-quote --bracket-spacing=false --write 'src/**/*.js'",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "prepublishOnly": "yarn build && yarn build:flow"
   },
   "lint-staged": {
     "src/**/*.js": [
