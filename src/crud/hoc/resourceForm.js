@@ -52,10 +52,13 @@ export function resourceForm(config: ResourceFormConfig) {
        */
       deleteResource = () => {
         const key = configuration.resource.key || 'uuid';
-        this.props.deleteResource(configuration.resource, {
-          [key]: this.props.updatedResource[key]
-        });
-        this.props.postSubmit && this.props.postSubmit();
+        this.props
+          .deleteResource(configuration.resource, {
+            [key]: this.props.updatedResource[key]
+          })
+          .then(() => {
+            this.props.postSubmit && this.props.postSubmit();
+          });
       };
 
       getPassThroughProps = () => {
