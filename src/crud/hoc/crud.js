@@ -231,7 +231,7 @@ export function crud(config: Config) {
         const promise = axios({
           url: `${this.props.backendUrl}/${resource.path}/${entity[key]}`,
           method: 'delete',
-          headers: {Authorization: this.props.token}
+          headers: config.tokenToHeader(this.props.token)
         });
 
         promise
