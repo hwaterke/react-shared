@@ -22,7 +22,7 @@ const defaultConfig = {
 function validateConfig(config: Config) {
   return {
     ...defaultConfig,
-    config
+    ...config
   };
 }
 
