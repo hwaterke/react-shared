@@ -1,14 +1,16 @@
 {
-  "name": "hw-react-shared",
-  "version": "0.0.1",
-  "description": "Code shared between different React apps",
+  "name": "redux-crud-hoc",
+  "version": "0.0.8",
+  "description": "HoC to easily interface with a REST backend",
   "main": "lib/index.js",
   "scripts": {
     "flow": "flow check",
-    "compile": "babel -d lib/ src/",
-    "compile:flow": "flow-copy-source src lib",
+    "prebuild": "rm -r lib || true",
+    "build": "babel -d lib/ src/",
+    "build:flow": "flow-copy-source src lib",
     "format": "prettier --single-quote --bracket-spacing=false --write 'src/**/*.js'",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "prepublishOnly": "yarn build && yarn build:flow"
   },
   "lint-staged": {
     "src/**/*.js": [
@@ -18,7 +20,7 @@
     ]
   },
   "peerDependencies": {
-    "react": "^15.0.0"
+    "react": "^15.0.0-0 || ^16.0.0-0"
   },
   "dependencies": {
     "axios": "^0.16.2",
@@ -30,7 +32,7 @@
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-eslint": "^7.2.3",
+    "babel-eslint": "^8.0.1",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.0",
@@ -40,14 +42,14 @@
     "eslint-config-react-app": "^2.0.0",
     "eslint-plugin-flowtype": "^2.35.1",
     "eslint-plugin-import": "^2.7.0",
-    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-react": "^7.3.0",
-    "flow-bin": "0.55.0",
+    "flow-bin": "0.56.0",
     "flow-copy-source": "^1.2.1",
     "husky": "^0.14.3",
     "lint-staged": "^4.2.2",
     "prettier": "^1.7.0",
-    "react": "^15.6.1"
+    "react": "^16.0.0"
   },
   "repository": {
     "type": "git",
