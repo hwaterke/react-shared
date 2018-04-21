@@ -48,11 +48,11 @@ rm -r lib > /dev/null 2>&1 || true
 check
 
 blue_line "Compiling... "
-yarn compile > /dev/null 2>&1
+yarn build > /dev/null 2>&1
 check
 
 blue_line "Compiling flow types... "
-yarn compile:flow > /dev/null 2>&1
+yarn build:flow > /dev/null 2>&1
 check
 
 # Copy lib somewhere safe
